@@ -1,0 +1,17 @@
+@mixin bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.minsk {
+  background-image: url('../../public/cities/minsk.jpg');
+  @include bg();
+}
+.moscow {
+  background-image: url('../../public/cities/moscow.jpg');
+  @include bg();
+}
+.bratislava {
+  background-image: url('../../public/cities/bratislava.jpg');
+  @include bg();
+}
