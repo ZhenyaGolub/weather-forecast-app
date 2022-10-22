@@ -29,13 +29,15 @@ const Detailed = () => {
   }, [city]);
 
   const getForecast = async (cityName) => {
+    let result;
     try {
       dispatch(setIsLoading(true));
       const response = await getWeatherForecastByCityName(
         getFormattedCityName(cityName)
       );
       dispatch(setIsLoading(false));
-      if ((response.cod = '200')) {
+
+      if (response.cod === '200') {
         dispatch(setFiveDaysForecast(response.list));
         sessionStorage.setItem(
           CURRENT_CITY_KEY,
@@ -43,14 +45,18 @@ const Detailed = () => {
         );
 
         dispatch(change(getFormattedCityName(cityName)));
+        result = true;
       }
 
-      if (response.message !== 0) {
+      if (response.cod == '404') {
         setIsError(true);
+        result = false;
       }
     } catch (error) {
       setIsError(true);
+      result = false;
     }
+    return result;
   };
 
   return (
