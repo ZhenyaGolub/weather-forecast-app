@@ -17,12 +17,13 @@ export const ChangeCityForm = ({ getForecast }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await getForecast(city);
-
-    router.replace({
-      pathname: DETAILED_PAGE_URL,
-      query: { city: getFormattedCityName(city) },
-    });
+    const response = await getForecast(city);
+    if (response) {
+      router.replace({
+        pathname: DETAILED_PAGE_URL,
+        query: { city: getFormattedCityName(city) },
+      });
+    }
   };
 
   const handleChangeCity = ({ target: { value } }) => {
