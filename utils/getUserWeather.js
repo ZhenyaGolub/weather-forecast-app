@@ -48,9 +48,7 @@ export const getUserWeather = async () => {
     const locationWeatherForecast = await new Promise(
       async (resolve, reject) => {
         try {
-          const currentLocation =
-            sessionStorage.getItem(CURRENT_CITY_KEY) ||
-            DEFAULT_CURRENT_LOCATION;
+          const currentLocation = sessionStorage.getItem(CURRENT_CITY_KEY);
           const response = await getWeatherForecastByCityName(currentLocation);
           store.dispatch(change(currentLocation));
           resolve(response);
